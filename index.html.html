@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Canon General Media Tech - Official Warranty</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Cairo & Roboto -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Cairo', 'sans-serif'],
+                        english: ['Roboto', 'sans-serif'],
+                    },
+                    colors: {
+                        canon: {
+                            red: '#E60012', // Official Canon Red
+                            black: '#000000',
+                            gray: '#F5F5F5',
+                            darkgray: '#333333'
+                        },
+                        tier: {
+                            standard: '#374151',
+                            plus: '#15803d',
+                            extreme: '#b91c1c'
+                        }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse-dot 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'slide-up': 'slide-up 0.6s ease-out forwards',
+                        'fade-in': 'fade-in 0.8s ease-out forwards',
+                        'lock-shine': 'lock-shine 2s forwards',
+                        'loader-line': 'loader-line 1.5s infinite ease-in-out',
+                        'gentle-pulse': 'gentle-pulse 2s infinite',
+                    },
+                    keyframes: {
+                        'pulse-dot': {
+                            '0%, 100%': { opacity: '1', transform: 'scale(1)', boxShadow: '0 0 0 0 rgba(74, 222, 128, 0.7)' },
+                            '50%': { opacity: '.8', transform: 'scale(1.1)', boxShadow: '0 0 0 10px rgba(74, 222, 128, 0)' },
+                        },
+                        'slide-up': {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        'fade-in': {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        'lock-shine': {
+                            '0%': { color: '#9ca3af', transform: 'scale(0.8)' },
+                            '50%': { color: '#E60012', transform: 'scale(1.1)' },
+                            '100%': { color: '#000000', transform: 'scale(1)' }
+                        },
+                        'loader-line': {
+                            '0%': { width: '0%', left: '0%' },
+                            '50%': { width: '50%', left: '25%' },
+                            '100%': { width: '0%', left: '100%' }
+                        },
+                        'gentle-pulse': {
+                            '0%, 100%': { opacity: '1' },
+                            '50%': { opacity: '0.8' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #f3f4f6;
+            color: #1f2937;
+            overflow-x: hidden;
+        }
+        
+        /* Moving Background Gradient */
+        .bg-animated {
+            background: linear-gradient(-45deg, #ffffff, #f3f4f6, #fff0f0, #f3f4f6);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @media print {
+            .no-print { display: none !important; }
+            body { background-color: white; -webkit-print-color-adjust: exact; }
+            .certificate-container { box-shadow: none; border: 1px solid #ddd; width: 100%; max-width: 100%; margin: 0; }
+            #intro-overlay { display: none !important; }
+        }
+        
+        .card-shadow {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Modern Table Styling */
+        .data-table-container {
+            border-radius: 0.75rem;
+            overflow: hidden;
+            border: 1px solid #e5e7eb;
+            background: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+        .data-row td {
+            transition: background-color 0.2s ease;
+        }
+        .data-row:hover td {
+            background-color: rgba(230, 0, 18, 0.03);
+        }
+
+        /* Toast Animation */
+        .toast-enter {
+            transform: translateY(100%);
+            opacity: 0;
+        }
+        .toast-enter-active {
+            transform: translateY(0);
+            opacity: 1;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .img-logo {
+            max-width: 150px;
+            height: auto;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-animated">
+
+    <!-- ================= OPENING FLOW OVERLAY ================= -->
+    <div id="intro-overlay" class="fixed inset-0 z-[100] bg-white hidden flex-col items-center justify-center text-center">
+        
+        <!-- STAGE 1: General Welcome -->
+        <div id="intro-stage-1" class="intro-stage absolute inset-0 flex flex-col items-center justify-center p-6 hidden">
+            <!-- Canon Logo Image Placeholder -->
+            <div class="mb-8 opacity-0 animate-fade-in" style="animation-delay: 0.1s;">
+                <!-- 
+                     تنبيه: لاستخدام Base64، استبدل الرابط في src أدناه بالكود الخاص بك.
+                     مثال: src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
+                -->
+                <img src="Canonlogo.png" alt="Canon Logo" class="w-40 h-auto">
+            </div>
+            
+            <h1 class="text-3xl font-bold text-gray-800 mb-2 opacity-0 animate-fade-in" style="animation-delay: 0.6s;">أهلاً بكم</h1>
+            <p class="text-lg text-gray-500 opacity-0 animate-fade-in" style="animation-delay: 1.0s;">شكراً لثقتكم – شركة General Media Tech</p>
+        </div>
+
+        <!-- STAGE 2: Personal Verification -->
+        <div id="intro-stage-2" class="intro-stage absolute inset-0 flex flex-col items-center justify-center p-6 hidden">
+             <!-- Smaller Canon Logo -->
+             <div class="mb-10 opacity-80 scale-75 transform transition-all duration-500">
+                <img src="Canonlogo.png" alt="Canon Logo" class="w-32 h-auto">
+            </div>
+
+            <h2 class="text-2xl font-bold text-gray-800 mb-2 animate-fade-in">أهلاً بك <span id="introCustomerName" class="text-canon-red"></span></h2>
+            <p class="text-gray-500 mb-6 text-sm">جارٍ تحميل كفالتكم...</p>
+
+            <!-- Verification Loader -->
+            <div class="w-64 h-1 bg-gray-200 rounded-full overflow-hidden relative">
+                <div class="absolute top-0 bottom-0 bg-canon-red w-1/3 animate-loader-line"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= TOAST NOTIFICATION ================= -->
+    <div id="toast" class="fixed top-6 left-1/2 transform -translate-x-1/2 z-[90] pointer-events-none transition-all duration-500 opacity-0 translate-y-[-20px]">
+        <div class="bg-white border-r-4 border-green-500 text-gray-800 px-6 py-4 rounded shadow-2xl flex items-center gap-3">
+            <div class="bg-green-100 p-2 rounded-full">
+                <i class="fas fa-check text-green-600"></i>
+            </div>
+            <div>
+                <h4 class="font-bold text-sm">تم التحقق بنجاح</h4>
+                <p class="text-xs text-gray-500 font-english">Warranty verified successfully</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= ADMIN VIEW (CREATE) ================= -->
+    <div id="admin-view" class="container mx-auto px-4 py-8 min-h-screen hidden bg-white">
+        <div class="max-w-3xl mx-auto">
+            <div class="text-center mb-8 border-b pb-4">
+                <h1 class="text-3xl font-bold text-canon-black mb-1">إدارة نظام الضمان</h1>
+                <p class="text-gray-500 text-sm">Canon General Media Tech - Internal System</p>
+            </div>
+
+            <form id="warrantyForm" class="space-y-6 bg-white p-8 rounded-lg border border-gray-200 shadow-sm">
+                <h3 class="text-lg font-bold text-canon-red border-r-4 border-canon-red pr-3">بيانات العميل والمنتج</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-2">
+                        <label class="text-sm font-bold text-gray-700">اسم العميل</label>
+                        <input type="text" id="customerName" required class="w-full bg-gray-50 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-canon-red transition-colors">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-sm font-bold text-gray-700">المنتج / الموديل</label>
+                        <input type="text" id="productName" required class="w-full bg-gray-50 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-canon-red transition-colors">
+                    </div>
+                </div>
+
+                <div class="space-y-2">
+                    <label class="text-sm font-bold text-gray-700">الرقم التسلسلي (S/N)</label>
+                    <input type="text" id="serialNo" required class="w-full bg-gray-50 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-canon-red font-mono" placeholder="SN-XXXXX">
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-2">
+                        <label class="text-sm font-bold text-gray-700">رقم الفاتورة</label>
+                        <input type="text" id="invoiceNo" class="w-full bg-gray-50 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-canon-red">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-sm font-bold text-gray-700">حالة المنتج (اكتب بيدك: مستعمل / جديد / معرض ...)</label>
+                        <input type="text" id="productCondition" class="w-full bg-gray-50 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-canon-red" placeholder="مثال: مستعمل - جيد">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-2">
+                        <label class="text-sm font-bold text-gray-700">تاريخ الشراء</label>
+                        <input type="date" id="purchaseDate" required class="w-full bg-gray-50 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-canon-red">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-sm font-bold text-gray-700">تاريخ انتهاء الكفالة</label>
+                        <input type="date" id="expiryDate" required class="w-full bg-gray-50 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-canon-red">
+                    </div>
+                </div>
+
+                <h3 class="text-lg font-bold text-canon-red border-r-4 border-canon-red pr-3 pt-4">تفاصيل الضمان</h3>
+
+                <div class="space-y-2">
+                    <label class="text-sm font-bold text-gray-700">نوع الضمان</label>
+                    <div class="grid grid-cols-3 gap-3">
+                        <label class="cursor-pointer">
+                            <input type="radio" name="warrantyType" value="standard" checked class="peer sr-only">
+                            <div class="text-center py-3 border rounded peer-checked:bg-gray-800 peer-checked:text-white transition-all text-sm font-bold">Standard</div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="radio" name="warrantyType" value="plus" class="peer sr-only">
+                            <div class="text-center py-3 border rounded peer-checked:bg-green-700 peer-checked:text-white transition-all text-sm font-bold">Plus</div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="radio" name="warrantyType" value="extreme" class="peer sr-only">
+                            <div class="text-center py-3 border rounded peer-checked:bg-red-700 peer-checked:text-white transition-all text-sm font-bold">Extreme</div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Notes field -->
+                <div class="mt-4">
+                  <label class="block mb-1 font-semibold text-gray-700">ملاحظات (اختياري)</label>
+                  <textarea
+                    name="notes"
+                    id="notes"
+                    rows="3"
+                    class="w-full bg-gray-50 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-canon-red"
+                    placeholder="اكتب أي ملاحظة لتظهر فقط بالشهادة (اختياري)"></textarea>
+                </div>
+
+                <div class="flex gap-2">
+                    <button type="submit" id="generateBtn" class="flex-1 bg-canon-red hover:bg-red-800 text-white font-bold py-4 rounded shadow-lg transition-all flex items-center justify-center gap-2">
+                        <i class="fas fa-file-contract"></i>
+                        إصدار الشهادة
+                    </button>
+
+                    <button type="button" id="copyBtn" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-4 px-4 rounded shadow transition-all flex items-center gap-2" title="انسخ الرابط بعد الإنشاء" disabled>
+                        <i class="fas fa-link"></i> نسخ الرابط
+                    </button>
+                </div>
+            </form>
+
+            <!-- Result -->
+            <div id="resultSection" class="hidden mt-8 p-6 bg-green-50 border border-green-200 rounded text-center">
+                <p class="text-green-800 font-bold mb-4">تم إنشاء وثيقة الضمان بنجاح</p>
+                
+                <!-- Admin QR Code Display -->
+                <div id="adminQrContainer" class="hidden flex flex-col items-center justify-center mb-6 bg-white p-4 rounded shadow-sm max-w-xs mx-auto">
+                    <img id="adminQrCode" src="" alt="Admin QR Code" class="w-32 h-32 object-contain">
+                    <p class="text-xs text-gray-500 mt-2">امسح الكود لفتح الشهادة مباشرة</p>
+                    
+                    <!-- NEW SAVE QR BUTTON -->
+                    <button id="downloadQrBtn" type="button" class="mt-3 bg-gray-100 hover:bg-gray-200 text-gray-800 text-xs font-bold py-2 px-4 rounded transition-colors flex items-center gap-2 border border-gray-300">
+                        <i class="fas fa-download"></i> حفظ QR
+                    </button>
+                </div>
+
+                <div class="flex gap-2 justify-center">
+                    <a id="previewBtn" href="#" target="_blank" class="bg-gray-800 text-white px-6 py-2 rounded hover:bg-gray-700 transition-colors">
+                        فتح الشهادة
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= CLIENT VIEW (CERTIFICATE) ================= -->
+    <div id="warranty-view" class="min-h-screen py-10 px-4 hidden flex flex-col items-center justify-start opacity-0 transition-opacity duration-700">
+        
+        <!-- Top Bar (The thin gradient bar) -->
+        <div id="topBar" class="fixed top-0 left-0 w-full h-1 z-50 gradient-bar"></div>
+
+        <div class="certificate-container w-full max-w-2xl bg-white rounded-xl card-shadow overflow-hidden relative animate-slide-up pb-8 border border-gray-100">
+            
+            <!-- Header -->
+            <div class="p-8 border-b border-gray-100 flex justify-between items-start relative">
+                <!-- Red Accent -->
+                <div class="absolute top-0 right-0 w-24 h-1 bg-canon-red"></div>
+                
+                <div>
+                    <!-- Canon Logo Image for Header -->
+                    <div class="mb-3">
+                         <img src="Canonlogo.png" alt="Canon Logo" class="w-24 h-auto">
+                    </div>
+                    <h1 class="text-2xl font-bold text-black uppercase tracking-wide">Warranty Certificate</h1>
+                    <h2 class="text-canon-red font-bold text-lg mt-1">Canon General Media Tech</h2>
+                    <p class="text-gray-500 text-xs mt-1 uppercase tracking-wider font-english">Authorized Canon Distributor in Syria</p>
+                </div>
+                <div class="text-4xl animate-lock-shine">
+                    <i class="fas fa-certificate"></i>
+                </div>
+            </div>
+
+            <!-- Body Content -->
+            <div class="p-8 space-y-8">
+
+                <!-- Status Section - Dynamic Styling -->
+                <div id="statusContainer" class="flex items-center gap-4 p-5 rounded-lg border transition-all duration-300">
+                    <div id="statusIconWrapper" class="w-10 h-10 rounded-full flex items-center justify-center text-white text-lg shadow-sm">
+                        <i id="statusIcon" class="fas"></i>
+                    </div>
+                    <div>
+                        <h3 id="statusTitle" class="font-bold text-base"></h3>
+                        <p class="text-xs text-gray-500">الضمان ساري حتى تاريخ الانتهاء المحدد في هذه الوثيقة</p>
+                    </div>
+                </div>
+
+                <!-- Product Data Table (Card Styled) -->
+                <div class="data-table-container">
+                    <table class="w-full text-sm text-right">
+                        <tbody class="divide-y divide-gray-100">
+                            <tr class="data-row group">
+                                <td class="p-4 bg-gray-50 w-1/3 font-bold text-gray-600 group-hover:bg-red-50 transition-colors"><i class="fas fa-box-open ml-2 text-gray-400"></i> اسم المنتج</td>
+                                <td id="dispProduct" class="p-4 font-bold text-black">...</td>
+                            </tr>
+                            <tr class="data-row group">
+                                <td class="p-4 bg-gray-50 font-bold text-gray-600 group-hover:bg-red-50 transition-colors"><i class="fas fa-barcode ml-2 text-gray-400"></i> الرقم التسلسلي</td>
+                                <td id="dispSerial" class="p-4 font-mono text-gray-800 tracking-wider">...</td>
+                            </tr>
+                            <tr class="data-row group">
+                                <td class="p-4 bg-gray-50 font-bold text-gray-600 group-hover:bg-red-50 transition-colors"><i class="fas fa-user ml-2 text-gray-400"></i> اسم العميل</td>
+                                <td id="dispCustomer" class="p-4 text-gray-800">...</td>
+                            </tr>
+                            <tr class="data-row group">
+                                <td class="p-4 bg-gray-50 font-bold text-gray-600 group-hover:bg-red-50 transition-colors"><i class="fas fa-shield-alt ml-2 text-gray-400"></i> نوع الضمان</td>
+                                <td class="p-4">
+                                    <span id="dispTypeBadge" class="px-3 py-1 rounded text-xs font-bold uppercase tracking-wider text-white shadow-sm">...</span>
+                                </td>
+                            </tr>
+                            <tr class="data-row group">
+                                <td class="p-4 bg-gray-50 font-bold text-gray-600 group-hover:bg-red-50 transition-colors"><i class="fas fa-calendar-check ml-2 text-gray-400"></i> تاريخ الشراء</td>
+                                <td id="dispPurchase" class="p-4 font-english text-gray-800">...</td>
+                            </tr>
+                            <tr class="data-row group">
+                                <td class="p-4 bg-gray-50 font-bold text-gray-600 group-hover:bg-red-50 transition-colors"><i class="fas fa-calendar-times ml-2 text-gray-400"></i> تاريخ الانتهاء</td>
+                                <td id="dispExpiry" class="p-4 font-english font-bold text-canon-red">...</td>
+                            </tr>
+                            <tr class="data-row group">
+                                <td class="p-4 bg-gray-50 font-bold text-gray-600 group-hover:bg-red-50 transition-colors"><i class="fas fa-file-invoice ml-2 text-gray-400"></i> رقم الفاتورة</td>
+                                <td id="dispInvoice" class="p-4 font-english text-gray-800">...</td>
+                            </tr>
+                            <tr class="data-row group">
+                                <td class="p-4 bg-gray-50 font-bold text-gray-600 group-hover:bg-red-50 transition-colors"><i class="fas fa-info-circle ml-2 text-gray-400"></i> حالة المنتج</td>
+                                <td id="dispProductStatus" class="p-4 font-english text-gray-800">...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Coverage Section -->
+                <div class="mt-6 bg-gray-50 p-5 rounded-lg border border-gray-100">
+                    <h4 class="font-bold text-gray-800 mb-3 border-b border-gray-200 pb-2 flex items-center gap-2">
+                        <i class="fas fa-check-circle text-canon-red"></i> ماذا يشمل هذا الضمان
+                    </h4>
+                    <ul id="dispCoverage" class="list-none space-y-2 text-sm text-gray-600"></ul>
+                </div>
+
+                <!-- Notes (show only if present) -->
+                <div id="notesContainer" class="mt-4 hidden border-r-4 border-yellow-400 bg-yellow-50 p-4 rounded-r-sm">
+                    <h4 class="font-semibold text-gray-800 mb-2 flex items-center gap-2"><i class="fas fa-sticky-note text-yellow-600"></i> ملاحظات</h4>
+                    <p id="notesText" class="text-sm text-gray-700"></p>
+                </div>
+
+                <!-- Countdown Timer (Enhanced) -->
+                <div id="countdownBox" class="bg-gray-900 text-white p-6 rounded-lg text-center relative overflow-hidden group shadow-lg transition-all duration-300">
+                    <!-- Glow Effect -->
+                    <div class="absolute inset-0 bg-canon-red opacity-0 group-hover:opacity-5 transition-opacity duration-500"></div>
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-white opacity-5 rounded-full -mr-16 -mt-16 blur-2xl"></div>
+                    
+                    <h4 class="text-xs text-gray-400 uppercase tracking-widest mb-4 font-english relative z-10">Time Remaining Until Expiry</h4>
+                    <h3 class="text-sm font-bold mb-6 text-gray-300 relative z-10">المدة المتبقية على انتهاء الضمان</h3>
+                    
+                    <div id="countdownContainer" class="flex justify-center items-center gap-3 md:gap-6 font-english relative z-10" dir="ltr">
+                        <div class="text-center">
+                            <div class="bg-gray-800 w-12 md:w-16 py-2 rounded border border-gray-700">
+                                <span id="cntMonths" class="block text-xl md:text-2xl font-bold">0</span>
+                            </div>
+                            <span class="text-[9px] md:text-[10px] text-gray-500 uppercase mt-1 block">Months</span>
+                        </div>
+                        <div class="text-gray-600 text-xl font-light">:</div>
+                        <div class="text-center">
+                            <div class="bg-gray-800 w-12 md:w-16 py-2 rounded border border-gray-700">
+                                <span id="cntDays" class="block text-xl md:text-2xl font-bold">0</span>
+                            </div>
+                            <span class="text-[9px] md:text-[10px] text-gray-500 uppercase mt-1 block">Days</span>
+                        </div>
+                        <div class="text-gray-600 text-xl font-light">:</div>
+                        <div class="text-center">
+                            <div class="bg-gray-800 w-12 md:w-16 py-2 rounded border border-gray-700">
+                                <span id="cntHours" class="block text-xl md:text-2xl font-bold">0</span>
+                            </div>
+                            <span class="text-[9px] md:text-[10px] text-gray-500 uppercase mt-1 block">Hours</span>
+                        </div>
+                        <div class="text-gray-600 text-xl font-light">:</div>
+                        <div class="text-center">
+                            <div class="bg-gray-800 w-12 md:w-16 py-2 rounded border border-gray-700 shadow-[0_0_15px_rgba(230,0,18,0.3)]">
+                                <span id="cntSeconds" class="block text-xl md:text-2xl font-bold text-canon-red">0</span>
+                            </div>
+                            <span class="text-[9px] md:text-[10px] text-gray-500 uppercase mt-1 block">Sec</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Footer with Logos -->
+                <div class="flex flex-col items-center mt-8 space-y-4">
+                    <!-- QR Code -->
+                    <div class="flex flex-col items-center group cursor-pointer">
+                        <div class="bg-white p-2 border border-gray-200 rounded shadow-sm group-hover:shadow-md transition-all duration-300 group-hover:scale-105">
+                            <img id="qrCodeImage" src="" alt="QR Code" class="w-24 h-24 object-contain opacity-90">
+                        </div>
+                        <p class="text-[10px] text-gray-400 mt-2 font-english text-center max-w-xs leading-tight">
+                            This warranty certificate is officially verified and digitally issued
+                        </p>
+                    </div>
+
+                    <!-- Authorized Partner Section -->
+                    <div class="w-full border-t border-gray-100 pt-6 mt-4 flex flex-col md:flex-row items-center justify-between gap-4">
+                         <div class="text-center md:text-right">
+                             <p class="text-xs font-bold text-gray-700 uppercase tracking-wide mb-1">Authorized Service & Warranty Partner</p>
+                             <p class="text-[10px] text-gray-500">General Media Tech - Canon Syria</p>
+                         </div>
+                         
+                         <!-- Logo Placeholder -->
+                         <div class="h-10 w-32 border border-dashed border-gray-300 rounded bg-gray-50 flex items-center justify-center text-gray-400 text-xs hover:border-canon-red hover:text-canon-red transition-colors">
+                             <img src="Genrallogo.png" alt="شعار الموقع">
+
+                         </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="bg-gray-50 border-t border-gray-200 p-4 text-center">
+                <p class="font-bold text-sm text-gray-800">© Canon General Media Tech</p>
+                <p class="text-[10px] text-gray-400 mt-1">وثيقة رسمية صادرة من النظام الرقمي</p>
+            </div>
+        </div>
+
+        <!-- Action Buttons (No Print) -->
+        <div class="max-w-2xl w-full mt-6 grid grid-cols-1 md:grid-cols-2 gap-4 no-print animate-fade-in" style="animation-delay: 0.5s">
+            <button onclick="window.print()" class="bg-white border border-gray-300 text-gray-700 py-3 rounded shadow-sm hover:bg-gray-50 font-bold transition-all transform hover:-translate-y-1 flex items-center justify-center gap-2">
+                <i class="fas fa-file-pdf text-canon-red"></i> تحميل الشهادة (PDF)
+            </button>
+            
+            <button onclick="toggleDetailsView()" class="bg-gray-800 text-white py-3 rounded shadow-sm hover:bg-gray-700 font-bold transition-all transform hover:-translate-y-1 flex items-center justify-center gap-2">
+                <i class="fas fa-info-circle"></i> تفاصيل الضمان
+            </button>
+
+            <!-- New Buttons -->
+            <a href="#" target="_blank" class="bg-blue-900 text-white py-3 rounded shadow-sm hover:bg-blue-800 font-bold transition-all transform hover:-translate-y-1 text-center flex items-center justify-center gap-2">
+                <i class="fas fa-users"></i> من نحن
+            </a>
+            
+            <!-- NEW WEBSITE BUTTON -->
+            <a href="https://yourwebsite.com" target="_blank" class="bg-cyan-600 text-white py-3 rounded shadow-sm hover:bg-cyan-700 font-bold transition-all transform hover:-translate-y-1 text-center flex items-center justify-center gap-2">
+                <i class="fas fa-globe"></i> زيارة موقعنا الالكتروني
+            </a>
+
+            <a href="#" target="_blank" class="bg-gray-600 text-white py-3 rounded shadow-sm hover:bg-gray-700 font-bold transition-all transform hover:-translate-y-1 text-center flex items-center justify-center gap-2">
+                <i class="fas fa-handshake"></i> وكلاؤنا
+            </a>
+            
+            <a href="https://instagram.com" target="_blank" class="bg-gradient-to-r from-purple-500 to-pink-500 text-white py-3 rounded shadow-sm hover:opacity-90 font-bold transition-all transform hover:-translate-y-1 text-center flex items-center justify-center gap-2">
+                <i class="fab fa-instagram"></i> زيارة الصفحة على انستغرام
+            </a>
+            <!-- End New Buttons -->
+
+            <a href="https://wa.me/963900000000" target="_blank" class="bg-green-600 text-white py-3 rounded shadow-sm hover:bg-green-700 font-bold transition-all transform hover:-translate-y-1 text-center flex items-center justify-center gap-2">
+                <i class="fab fa-whatsapp"></i> تواصل معنا واتساب
+            </a>
+        </div>
+    </div>
+
+    <!-- ================= DETAILS VIEW (Definitions) ================= -->
+    <div id="details-view" class="fixed inset-0 bg-white z-[110] hidden overflow-y-auto">
+        <div class="max-w-3xl mx-auto px-4 py-12">
+            <button onclick="toggleDetailsView()" class="mb-8 flex items-center gap-2 text-gray-600 hover:text-canon-red transition-colors font-bold">
+                <i class="fas fa-arrow-right"></i> العودة للشهادة
+            </button>
+
+            <h1 class="text-3xl font-bold mb-2 text-black">سياسة الضمانات</h1>
+            <p class="text-gray-500 mb-10">General Media Tech Warranty Policies</p>
+
+            <div class="space-y-8">
+                <!-- Basic -->
+                <div class="bg-gray-50 border-r-4 border-gray-600 p-6 rounded-l-lg shadow-sm">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2"><i class="fas fa-shield-alt text-gray-600"></i> أولاً: الباقة الأساسية (Basic)</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700 text-sm leading-relaxed">
+                        <li>يشمل هذا الضمان عيوب التصنيع فقط، ولا يشمل أي أعطال ناتجة عن سوء الاستخدام، أو الكسر، أو السوائل، أو الصدمات، أو التعديلات غير المعتمدة.</li>
+                        <li>يشمل الضمان بطارية الجهاز وفق شروط الشركة المصنعة.</li>
+                        <li>يسقط الضمان في حال فتح الجهاز أو العبث به من قبل جهة غير معتمدة.</li>
+                    </ul>
+                </div>
+
+                <!-- Plus -->
+                <div class="bg-green-50 border-r-4 border-green-600 p-6 rounded-l-lg shadow-sm">
+                    <h3 class="text-xl font-bold text-green-800 mb-4 flex items-center gap-2"><i class="fas fa-star text-green-600"></i> ثانياً: باقة بلس (Plus)</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700 text-sm leading-relaxed">
+                        <li>يشمل هذا الضمان عيوب التصنيع فقط، إضافة إلى خصم بنسبة 50% من تكلفة أجور الصيانة للأعطال الناتجة عن سوء الاستخدام.</li>
+                        <li>لا يشمل الخصم سعر قطع التبديل، ويتم احتسابها بشكل كامل على العميل.</li>
+                        <li>يشمل الضمان بطارية الجهاز وفق شروط الشركة المصنعة.</li>
+                        <li>يسقط الضمان في حال وجود كسر متعمد، أو أضرار جسيمة، أو فتح الجهاز من قبل جهة غير معتمدة.</li>
+                    </ul>
+                </div>
+
+                <!-- Extreme -->
+                <div class="bg-red-50 border-r-4 border-canon-red p-6 rounded-l-lg shadow-sm">
+                    <h3 class="text-xl font-bold text-red-800 mb-4 flex items-center gap-2"><i class="fas fa-meteor text-canon-red"></i> ثالثاً: باقة لوكال إكستريم (Local Extreme)</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700 text-sm leading-relaxed">
+                        <li>يشمل هذا الضمان عيوب التصنيع فقط، ولا يشمل أي أعطال ناتجة عن سوء الاستخدام، أو الكسر، أو السوائل، أو الصدمات.</li>
+                        <li>يشمل هذا الضمان صيانة مجانية كاملة لمدة سنة واحدة من تاريخ الشراء، وتشمل أجور الصيانة فقط.</li>
+                        <li>لا يشمل الضمان سعر قطع التبديل، ويتم احتسابها بشكل منفصل على العميل.</li>
+                        <li>لا يشمل الضمان الأضرار الناتجة عن الإهمال الشديد، أو الكسر المتعمد، أو السوائل، أو الاستخدام غير الطبيعي للجهاز.</li>
+                        <li>يسقط الضمان في حال فتح الجهاز أو التعديل عليه من قبل جهة غير معتمدة.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-12 text-center">
+                 <button onclick="toggleDetailsView()" class="bg-canon-red text-white px-8 py-3 rounded font-bold hover:bg-red-800 transition-colors">
+                    فهمت، العودة للوثيقة
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= JAVASCRIPT LOGIC ================= -->
+    <script>
+        // --- Encoding Utilities ---
+        function encodeData(data) {
+            try {
+                const jsonString = JSON.stringify(data);
+                return btoa(unescape(encodeURIComponent(jsonString))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+            } catch (e) { return null; }
+        }
+        function decodeData(encoded) {
+            try {
+                let base64 = encoded.replace(/-/g, '+').replace(/_/g, '/');
+                while (base64.length % 4) { base64 += '='; }
+                return JSON.parse(decodeURIComponent(escape(atob(base64))));
+            } catch (e) { return null; }
+        }
+
+        // --- Automatic coverage texts for each package (UPDATED) ---
+        const coverageTexts = {
+            standard: [
+                'يشمل هذا الضمان عيوب التصنيع فقط، ولا يشمل أي أعطال ناتجة عن سوء الاستخدام، أو الكسر، أو السوائل، أو الصدمات، أو التعديلات غير المعتمدة.',
+                'يشمل الضمان بطارية الجهاز وفق شروط الشركة المصنعة.',
+                'يسقط الضمان في حال فتح الجهاز أو العبث به من قبل جهة غير معتمدة.'
+            ],
+            plus: [
+                'يشمل هذا الضمان عيوب التصنيع فقط، إضافة إلى خصم بنسبة 50% من تكلفة أجور الصيانة للأعطال الناتجة عن سوء الاستخدام .',
+                'لا يشمل الخصم سعر قطع التبديل، ويتم احتسابها بشكل كامل على العميل.',
+                'يشمل الضمان بطارية الجهاز وفق شروط الشركة المصنعة.',
+                'يسقط الضمان في حال وجود كسر متعمد، أو أضرار جسيمة، أو فتح الجهاز من قبل جهة غير معتمدة.'
+            ],
+            extreme: [
+                'يشمل هذا الضمان عيوب التصنيع فقط، ولا يشمل أي أعطال ناتجة عن سوء الاستخدام، أو الكسر، أو السوائل، أو الصدمات',
+                'يشمل هذا الضمان صيانة مجانية كاملة لمدة سنة واحدة من تاريخ الشراء، وتشمل أجور الصيانة فقط.',
+                'لا يشمل الضمان سعر قطع التبديل، ويتم احتسابها بشكل منفصل على العميل.',
+                'لا يشمل الضمان الأضرار الناتجة عن الإهمال الشديد، أو الكسر المتعمد، أو السوائل، أو الاستخدام غير الطبيعي للجهاز.',
+                'يسقط الضمان في حال فتح الجهاز أو التعديل عليه من قبل جهة غير معتمدة.'
+            ]
+        };
+
+        // --- Main Logic ---
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const dataParam = urlParams.get('w');
+
+            if (dataParam) {
+                // Intercept immediate show, play opening flow first
+                const data = decodeData(dataParam);
+                if(data) {
+                    playOpeningFlow(data);
+                }
+            } else {
+                document.getElementById('admin-view').classList.remove('hidden');
+                // Set default dates
+                document.getElementById('purchaseDate').valueAsDate = new Date();
+                const nextYear = new Date();
+                nextYear.setFullYear(nextYear.getFullYear() + 1);
+                document.getElementById('expiryDate').valueAsDate = nextYear;
+            }
+        };
+
+        // --- Opening Flow Logic ---
+        function playOpeningFlow(data) {
+            const overlay = document.getElementById('intro-overlay');
+            const stage1 = document.getElementById('intro-stage-1');
+            const stage2 = document.getElementById('intro-stage-2');
+            const nameSpan = document.getElementById('introCustomerName');
+
+            // 1. Show Overlay
+            overlay.classList.remove('hidden');
+            overlay.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+
+            // 2. Play Stage 1 (General Welcome)
+            stage1.classList.remove('hidden');
+
+            // 3. Transition to Stage 2 after 2.5s
+            setTimeout(() => {
+                // Fade out Stage 1
+                stage1.classList.add('transition-opacity', 'duration-500', 'opacity-0');
+                
+                setTimeout(() => {
+                    stage1.classList.add('hidden');
+                    // Prepare Stage 2
+                    nameSpan.textContent = data.c; // Set Customer Name
+                    stage2.classList.remove('hidden');
+                    // Animate Stage 2 In
+                    stage2.classList.add('animate-fade-in');
+                    
+                    // 4. End Flow after 2.5s more
+                    setTimeout(() => {
+                        // Fade out Overlay
+                        overlay.classList.add('transition-opacity', 'duration-700', 'opacity-0');
+                        
+                        setTimeout(() => {
+                            overlay.classList.add('hidden');
+                            document.body.style.overflow = 'auto';
+                            
+                            // Show Main Warranty View
+                            showWarrantyView(data);
+                            
+                            // Show Success Toast
+                            showToast();
+                            
+                        }, 700); // Wait for overlay fade out
+                    }, 2500); // Duration of Stage 2
+
+                }, 500); // Wait for Stage 1 fade out
+            }, 2500); // Duration of Stage 1
+        }
+
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.remove('opacity-0', 'translate-y-[-20px]');
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-[-20px]');
+            }, 3000);
+        }
+
+        // --- Admin Form Submit ---
+        document.getElementById('warrantyForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const selectedType = document.querySelector('input[name="warrantyType"]:checked').value;
+            const data = {
+                c: document.getElementById('customerName').value,
+                p: document.getElementById('productName').value,
+                s: document.getElementById('serialNo').value,
+                inv: document.getElementById('invoiceNo').value,
+                ist: document.getElementById('productCondition').value,
+                pd: document.getElementById('purchaseDate').value,
+                ed: document.getElementById('expiryDate').value,
+                t: selectedType,
+                cov: coverageTexts[selectedType].join(' || '),
+                notes: document.getElementById('notes').value || ''
+            };
+
+            const encoded = encodeData(data);
+            const baseUrl = window.location.origin + window.location.pathname;
+            const finalLink = `${baseUrl}?w=${encoded}`;
+
+            // Set preview link
+            document.getElementById('previewBtn').href = finalLink;
+
+            // --- Generate QR for Admin ---
+            const adminQrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(finalLink)}`;
+            document.getElementById('adminQrCode').src = adminQrUrl;
+            document.getElementById('adminQrContainer').classList.remove('hidden');
+
+            // Enable copy button and attach link
+            const copyBtn = document.getElementById('copyBtn');
+            copyBtn.disabled = false;
+            copyBtn.dataset.link = finalLink;
+            copyBtn.innerHTML = '<i class="fas fa-link"></i> نسخ الرابط';
+            copyBtn.title = 'انسخ رابط الشهادة إلى الحافظة';
+
+            // Show result
+            document.getElementById('resultSection').classList.remove('hidden');
+            document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // --- Copy Link Button ---
+        document.getElementById('copyBtn').addEventListener('click', function() {
+            const link = this.dataset.link;
+            if (!link) return;
+            const btn = this;
+            const prevHTML = btn.innerHTML;
+            navigator.clipboard.writeText(link).then(() => {
+                btn.innerHTML = '<i class="fas fa-check"></i> تم النسخ';
+                setTimeout(() => {
+                    btn.innerHTML = prevHTML;
+                }, 1500);
+            }).catch(() => {
+                alert('فشل النسخ — استخدم النسخ اليدوي.');
+            });
+        });
+
+        // --- View & Render Logic (Renamed to accept object directly) ---
+        function showWarrantyView(data) {
+            const view = document.getElementById('warranty-view');
+            view.classList.remove('hidden');
+            // Trigger Fade In of Main View
+            setTimeout(() => view.classList.remove('opacity-0'), 100);
+
+            // Basic Fields
+            document.getElementById('dispCustomer').textContent = data.c;
+            document.getElementById('dispProduct').textContent = data.p;
+            document.getElementById('dispSerial').textContent = data.s;
+            document.getElementById('dispInvoice').textContent = data.inv || '---';
+            document.getElementById('dispProductStatus').textContent = data.ist || '---';
+            document.getElementById('dispPurchase').textContent = formatDate(data.pd);
+            document.getElementById('dispExpiry').textContent = formatDate(data.ed);
+
+            // Coverage List (automatic)
+            const covList = document.getElementById('dispCoverage');
+            covList.innerHTML = '';
+            const chosenType = data.t || 'standard';
+            // Use current text logic (re-read from object to ensure update)
+            const points = coverageTexts[chosenType] || [];
+            if (points.length) {
+                points.forEach(point => {
+                    const li = document.createElement('li');
+                    li.className = "flex items-start gap-2";
+                    li.innerHTML = `<i class="fas fa-check text-green-600 mt-1 text-xs"></i> <span>${point}</span>`;
+                    covList.appendChild(li);
+                });
+            } else {
+                covList.innerHTML = '<li class="text-gray-400 italic">لا توجد تفاصيل إضافية محددة</li>';
+            }
+
+            // Notes
+            const notesContainer = document.getElementById('notesContainer');
+            const notesText = document.getElementById('notesText');
+            if (data.notes && data.notes.trim() !== '') {
+                notesText.textContent = data.notes;
+                notesContainer.classList.remove('hidden');
+            } else {
+                notesText.textContent = '';
+                notesContainer.classList.add('hidden');
+            }
+
+            // Theme & Status Logic
+            const today = new Date();
+            const expiry = new Date(data.ed);
+            const isActive = today <= expiry;
+
+            const badge = document.getElementById('dispTypeBadge');
+            const statusContainer = document.getElementById('statusContainer');
+            const statusIcon = document.getElementById('statusIcon');
+            const statusIconWrapper = document.getElementById('statusIconWrapper');
+            const statusTitle = document.getElementById('statusTitle');
+
+            // 1. Warranty Type Badge (Standard/Plus/Extreme)
+            switch(chosenType) {
+                case 'extreme':
+                    badge.textContent = 'Extreme Warranty';
+                    badge.className = 'px-3 py-1 rounded text-xs font-bold uppercase tracking-wider text-white bg-red-700';
+                    break;
+                case 'plus':
+                    badge.textContent = 'Plus Warranty';
+                    badge.className = 'px-3 py-1 rounded text-xs font-bold uppercase tracking-wider text-white bg-green-700';
+                    break;
+                case 'standard':
+                default:
+                    badge.textContent = 'Standard Warranty';
+                    badge.className = 'px-3 py-1 rounded text-xs font-bold uppercase tracking-wider text-white bg-gray-700';
+                    break;
+            }
+
+            // 2. Warranty STATUS (Active/Expired)
+            if (isActive) {
+                // Active Styling
+                statusContainer.className = "flex items-center gap-4 p-5 rounded-lg border border-green-200 bg-green-50 shadow-sm transition-all duration-300";
+                statusIconWrapper.className = "w-10 h-10 rounded-full flex items-center justify-center text-white text-lg shadow-sm bg-green-600 animate-pulse-slow";
+                statusIcon.className = "fas fa-check";
+                statusTitle.textContent = "حالة الكفالة: سارية المفعول (Active)";
+                statusTitle.className = "font-bold text-base text-green-800";
+                
+                // Add gentle glow to countdown box if active
+                document.getElementById('countdownBox').classList.add('shadow-[0_0_20px_rgba(22,163,74,0.3)]');
+            } else {
+                // Expired Styling
+                statusContainer.className = "flex items-center gap-4 p-5 rounded-lg border border-red-200 bg-red-50 shadow-sm transition-all duration-300";
+                statusIconWrapper.className = "w-10 h-10 rounded-full flex items-center justify-center text-white text-lg shadow-sm bg-canon-red"; // No animation
+                statusIcon.className = "fas fa-times-circle";
+                statusTitle.textContent = "حالة الكفالة: منتهية الصلاحية (Expired)";
+                statusTitle.className = "font-bold text-base text-canon-red";
+                
+                document.getElementById('countdownBox').classList.remove('shadow-[0_0_20px_rgba(22,163,74,0.3)]');
+            }
+
+            // Countdown and QR 
+            startCountdown(expiry);
+            const currentUrl = window.location.href;
+            document.getElementById('qrCodeImage').src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(currentUrl)}`;
+        }
+ 
+        // --- Countdown Logic ---
+        function startCountdown(expiryDate) {
+            const updateTimer = () => {
+                const now = new Date().getTime();
+                const distance = expiryDate.getTime() - now;
+
+                if (distance < 0) {
+                    document.getElementById("countdownContainer").innerHTML = '<span class="text-red-500 font-bold text-xl">انتهت فترة الضمان</span>';
+                    return;
+                }
+
+                const daysTotal = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const months = Math.floor(daysTotal / 30);
+                const days = daysTotal % 30;
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById("cntMonths").innerText = months;
+                document.getElementById("cntDays").innerText = days;
+                document.getElementById("cntHours").innerText = hours;
+                document.getElementById("cntSeconds").innerText = seconds;
+            };
+
+            updateTimer();
+            setInterval(updateTimer, 1000);
+        }
+
+        // --- UI Helpers ---
+        function toggleDetailsView() {
+            const view = document.getElementById('details-view');
+            if(view.classList.contains('hidden')) {
+                view.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            } else {
+                view.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }
+        }
+        function formatDate(dateString) {
+            if (!dateString) return '...';
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-GB', {
+                day: '2-digit', month: '2-digit', year: 'numeric'
+            });
+        }
+
+        // --- NEW: Download QR Logic ---
+        document.getElementById('downloadQrBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            const img = document.getElementById('adminQrCode');
+            const url = img.src;
+            if(!url) return;
+
+            fetch(url)
+                .then(response => response.blob())
+                .then(blob => {
+                    const blobUrl = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = blobUrl;
+                    a.download = 'warranty-qr.png';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    window.URL.revokeObjectURL(blobUrl);
+                })
+                .catch(() => window.open(url, '_blank'));
+        });
+    </script>
+</body>
+</html>
+
