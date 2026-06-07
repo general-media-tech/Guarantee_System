@@ -80,13 +80,13 @@
     <!-- Search Box -->
     <div class="w-full max-w-md bg-white rounded-[2rem] p-6 shadow-xl shadow-gray-200/50 border border-white relative">
         <label class="block text-[10px] font-black text-gray-400 mb-2 px-1 uppercase tracking-widest text-center">
-            أدخل رقم IMEI أو رقم الفاتورة أو رقم الهاتف
+            أدخل رقم الفاتورة أو رقم الهاتف
         </label>
         <div class="flex gap-2">
             <input
                 type="text"
                 id="searchInput"
-                placeholder="مثال: 35XXXXX أو INV-001 أو 09XXXXXXX"
+                placeholder="مثال: 35 INV-001 أو 09XXXXXXX"
                 class="flex-1 bg-gray-50 p-4 rounded-2xl text-sm font-bold border border-gray-100 text-center text-gray-800 transition-all"
                 onkeypress="if(event.key==='Enter') searchWarranty()"
             >
@@ -197,7 +197,7 @@
             <span class="text-[13px] font-black text-gray-700 group-hover:text-[#E60012] transition-colors">تواصل معنا</span>
         </a>
     </div>
-
+    
     <script>
         // =====================================================
         // ⚙️ SUPABASE — نفس إعدادات نظام الكفالة
